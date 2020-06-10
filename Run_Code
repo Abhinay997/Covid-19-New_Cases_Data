@@ -1,5 +1,5 @@
-#Data Source-: https://covid.ourworldindata.org/data/owid-covid-data.csv
-# Code starts after data is Imported in Rstudio
+##Data Source-: https://covid.ourworldindata.org/data/owid-covid-data.csv
+## Code starts after data is Imported in Rstudio
 colnames(owid.covid.data)<- owid.covid.data[1,]
 as.character(col)
 AsiaCovidData<- subset(owid.covid.data,V2=="Asia")
