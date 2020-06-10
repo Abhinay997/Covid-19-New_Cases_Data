@@ -1,0 +1,67 @@
+#Data Source-: https://covid.ourworldindata.org/data/owid-covid-data.csv
+# Code starts after data is Imported in Rstudio
+colnames(owid.covid.data)<- owid.covid.data[1,]
+as.character(col)
+AsiaCovidData<- subset(owid.covid.data,V2=="Asia")
+colnames(AsiaCovidData)<- c("iso_code","continent", "location", "date", "total_cases", "new_cases", "total_deaths", "new_deaths", "total_cases_per_million", "new_cases_per_million", "total_deaths_per_million", "new_deaths_per_million", "total_tests", "new_tests", "new_tests_smoothed", "total_tests_per_thousand", "new_tests_per_thousand", "new_tests_smoothed_per_thousand", "tests_units", "stringency_index", "population", "population_density", "median_age", "aged_65_older", "aged_70_older", "gdp_per_capita", "extreme_poverty", "cvd_death_rate", "diabetes_prevalence", "female_smokers", "male_smokers", "handwashing_facilities", "hospital_beds_per_thousand")
+IndiaCovidData<-subset(AsiaCovidData,location=="India")
+PakistanCovidData<- subset(AsiaCovidData,location=="Pakistan")
+ChinaCovidData<- subset( AsiaCovidData,location=="China")
+with(subset(IndiaCovidData,select=9673:9712),plot(date,total_cases))
+ChinaCovidData<-ChinaCovidData[4470:4509,]
+PakistanCovidData<-PakistanCovidData[15929:15968,]
+par(bg= "White",mfrow=c(1,3),mai=c(1,2,3,1),mar=c(5,4,4,2),oma=c(1,1,3,1))
+IndiaMay<-subset(IndiaCovidData,date2 > as.Date("2020/04/30"))
+IndiaCovidData$date2<-as.Date(as.character(IndiaCovidData$date),"%y/%m/%d")
+row.names(IndiaCovidData)<- c(1:161)
+row.names(ChinaCovidData)<- c(1:162)
+row.names(PakistanCovidData)<- c(1:157)
+Day<-c(1:31)
+IndiaCovidMarch<- IndiaCovidData[62:91,3:8]
+PakCovidMarch<- PakistanCovidData[62:87,3:8]
+ChinaCovidMarch<- ChinaCovidMarch[,-1]
+IndiaCovidMarch<-cbind(Day,IndiaCovidMarch)
+PakCovidMarch<-cbind(Day,PakCovidMarch)
+ChinaCovidMarch<-cbind(Day,ChinaCovidMarch)
+Covid_Data_March<-rbind(IndiaCovidMarch,ChinaCovidMarch,PakCovidMarch)
+with(Covid_Data_March,plot(Day,new_cases,main= "Daily New Cases in March 2020",xlab = "Day of the Month",ylab = "No. of New cases",type = "n",bg="Grey33"))
+with(subset(Covid_Data_March,location== "India"),points(Day,new_cases,pch= 17,col="Blue",cex=3.5))
+with(subset(Covid_Data_March,location== "China"),points(Day,new_cases,pch=17,col="Red",cex=3.5))
+with(subset(Covid_Data_March,location== "Pakistan"),points(Day,new_cases,pch=17,col= "Green",cex=3.5))
+legend("topright",pch=17,col=c("Blue","Red","Green"),legend = c("Ind","Chn","Pak"),cex=0.5,pt.cex=1.5,text.width = 0.5,bg="Yellow")
+IndiaCovidDataApril<- IndiaCovidData[92:121,3:8]
+PakistanCovidDataApril<- PakistanCovidData[88:117,3:8]
+ChinaCovidDataApril<- ChinaCovidData[93:122,3:8]
+IndiaCovidDataApril<- cbind(Day,IndiaCovidDataApril)
+PakistanCovidDataApril<- cbind(Day,PakistanCovidDataApril)
+ChinaCovidDataApril<- cbind(Day,ChinaCovidDataApril)
+Covid_Data_April<- rbind(IndiaCovidDataApril,ChinaCovidDataApril,PakistanCovidDataApril)
+with(Covid_Data_April,plot(Day,new_cases,main= "Daily New Cases in April 2020",xlab = "Day of the Month",ylab = "No. of New cases",type = "n"))
+with(subset(Covid_Data_April,location== "India"),points(Day,new_cases,pch= 17,col="Blue",cex=3.5,bg= "Grey33"))
+with(subset(Covid_Data_April,location== "China"),points(Day,new_cases,pch=17,col="Red",cex=3.5,bg="Grey33"))
+with(subset(Covid_Data_April,location== "Pakistan"),points(Day,new_cases,pch=17,col= "Green",cex=3.5,bg="Grey33"))
+legend("topright",pch=17,col=c("Blue","Red","Green"),legend = c("Ind","Chn","Pak"),cex=0.5,pt.cex=1.5,text.width = 0.5,bg="Yellow")
+IndiaCovidMay<- IndiaCovidData[122:152,3:8]
+ChinaCovidMay<- ChinaCovidData[123:153,3:8]
+PakistanCovidMay <- PakistanCovidData[118:148,3:8]
+IndiaCovidMay<-cbind(Day,IndiaCovidMay)
+PakistanCovidMay<-cbind(Day,PakistanCovidMay)
+ChinaCovidMay<- cbind(Day,ChinaCovidMay) 
+Covid_Data_May<-rbind(IndiaCovidMay,ChinaCovidMay,PakistanCovidMay)
+with(Covid_Data_May,plot(Day,new_cases,main= "Daily New Cases in May 2020",xlab = "Day of the Month",ylab = "No. of New cases",type = "n"))
+with(subset(Covid_Data_May,location== "India"),points(Day,new_cases,pch= 17,col="Blue",cex=3.5))
+with(subset(Covid_Data_May,location== "China"),points(Day,new_cases,pch=17,col="Red",cex=3.5))
+with(subset(Covid_Data_May,location== "Pakistan"),points(Day,new_cases,pch=17,col= "Green",cex=3.5))
+legend("topright",pch=17,col=c("Blue","Red","Green"),legend = c("Ind","Chn","Pak"),cex=0.5,pt.cex=1.5,text.width = 0.5,bg="Yellow")
+
+
+
+
+
+
+
+
+
+
+
+
